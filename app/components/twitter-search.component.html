@@ -1,0 +1,22 @@
+<div class="container">
+  <h1 class="text-center text-primary">Twitter Search Widget</h1>
+
+  <h2 class="text-center">Enter a word</h2>
+  <br>
+  <h4 class="text-center">Enter a search term and we will give you a bunch of stuff</h4>
+
+  <form (ngSubmit)="onSearch()">
+    <div class="input-group search-block">
+      <input type="text" class="form-control input-field" placeholder="Search..." aria-describedby="basic-addon2" [(ngModel)]="word">
+      <span class="input-group-addon btn btn-default go-button" (click)="onSearch()">Go!</span>
+    </div>
+  </form>
+
+  <h4 class="text-center">
+    displaying results from <a href="http://www.twitter.com">twitter.com</a>
+  </h4>
+
+  <div class="tag-list">
+    <h2 class="text-primary tag" *ngFor="let tag of hashtags">{{'#'+tag}}</h2>
+  </div>
+</div>
