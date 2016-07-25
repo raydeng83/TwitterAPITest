@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Jsonp, Http, Headers} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
 export class TwitterSearchService {
-  constructor (private http: Http, private jsonp: Jsonp) {}
+  constructor (private http: Http) {}
 
   search(word: string) {
 

@@ -12,8 +12,12 @@
     </div>
   </form>
 
-  <h4 class="text-center">
-    displaying results from <a href="http://www.twitter.com">twitter.com</a>
+  <h4 *ngIf="withoutSuggest && displayResult" class="text-center">
+    Displaying results from <a href="http://www.twitter.com">twitter.com</a>
+  </h4>
+
+  <h4 *ngIf="!withoutSuggest && displayResult" class="text-center">
+    No Hashtags matched your search, here are some suggestions form <a href="http://www.dictionary.com">dictionary.com</a>
   </h4>
 
   <div class="tag-list">

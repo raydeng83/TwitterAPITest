@@ -10,22 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var TwitterSearchService = (function () {
-    function TwitterSearchService(http) {
+var SpellSuggestService = (function () {
+    function SpellSuggestService(http) {
         this.http = http;
     }
-    TwitterSearchService.prototype.search = function (word) {
-        var token = 'Bearer ' + 'AAAAAAAAAAAAAAAAAAAAAK7nwAAAAAAA%2BKwPqL2dZ7YCrQci9j8ejKPBDTo%3DKbXIoAVDYglb6NxbQtciZGS31RAwhpdYgl7PrdNZxv8qbGrX0I';
-        var url = "http://localhost:8080/https://api.twitter.com/1.1/search/tweets.json?q=%23" + word;
-        var headers1 = new http_1.Headers({ 'Content-Type': 'application/json', 'Authorization': token });
-        console.log(url);
-        return this.http.get(url, { headers: headers1 });
+    SpellSuggestService.prototype.search = function (rawWord) {
+        var url = "http://localhost:8080/http://www.dictionary.com/misspelling?term=" + rawWord;
+        return this.http.get(url);
     };
-    TwitterSearchService = __decorate([
+    SpellSuggestService.prototype.getSuggestedWord = function (htmlContent) {
+        console.log(htmlContent);
+    };
+    SpellSuggestService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], TwitterSearchService);
-    return TwitterSearchService;
+    ], SpellSuggestService);
+    return SpellSuggestService;
 }());
-exports.TwitterSearchService = TwitterSearchService;
-//# sourceMappingURL=twitter-search.service.js.map
+exports.SpellSuggestService = SpellSuggestService;
+//# sourceMappingURL=spell-suggest.service.js.map

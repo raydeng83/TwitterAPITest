@@ -10,13 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var twitter_search_service_1 = require('../services/twitter-search.service');
+var spell_suggest_service_1 = require('../services/spell-suggest.service');
 var TwitterSearchComponent = (function () {
-    function TwitterSearchComponent(twitterSearchService) {
+    function TwitterSearchComponent(twitterSearchService, spellSuggestService) {
         this.twitterSearchService = twitterSearchService;
+        this.spellSuggestService = spellSuggestService;
         this.hashtags = new Set();
+        this.withoutSuggest = true;
+        this.displayResult = false;
     }
     TwitterSearchComponent.prototype.onSearch = function () {
         var _this = this;
+        this.displayResult = true;
         this.hashtags.clear();
         console.log("Search commited");
         this.twitterSearchService.search(this.word).subscribe(function (data) {
@@ -27,6 +32,20 @@ var TwitterSearchComponent = (function () {
                 }
             }
             console.log(_this.hashtags);
+            console.log(_this.hashtags.size);
+            if (!_this.hashtags.size) {
+                console.log("enter if clause");
+                _this.withoutSuggest = false;
+                _this.spellSuggestService.search(_this.word).subscribe(function (text) {
+                    var htmlContent = JSON.parse(JSON.stringify(text))._body;
+                }, function (error) {
+                    console.log(error);
+                    var htmlContent = JSON.parse(JSON.stringify(error))._body;
+                    _this.word = jQuery(htmlContent).find('.closest-result').find('span').text();
+                    _this.onSearch();
+                });
+                _this.withoutSuggest = false;
+            }
         }, function (error) { return console.log(error); });
     };
     TwitterSearchComponent = __decorate([
@@ -35,7 +54,7 @@ var TwitterSearchComponent = (function () {
             templateUrl: 'app/components/twitter-search.component.html',
             styleUrls: ['app/components/twitter-search.component.css']
         }), 
-        __metadata('design:paramtypes', [twitter_search_service_1.TwitterSearchService])
+        __metadata('design:paramtypes', [twitter_search_service_1.TwitterSearchService, spell_suggest_service_1.SpellSuggestService])
     ], TwitterSearchComponent);
     return TwitterSearchComponent;
 }());

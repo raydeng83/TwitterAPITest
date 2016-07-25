@@ -12,13 +12,14 @@ var core_1 = require('@angular/core');
 var twitter_search_component_1 = require('./components/twitter-search.component');
 var twitter_search_service_1 = require('./services/twitter-search.service');
 var http_1 = require('@angular/http');
+var spell_suggest_service_1 = require("./services/spell-suggest.service");
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            providers: [http_1.HTTP_PROVIDERS, http_1.JSONP_PROVIDERS, twitter_search_service_1.TwitterSearchService],
+            providers: [http_1.HTTP_PROVIDERS, twitter_search_service_1.TwitterSearchService, spell_suggest_service_1.SpellSuggestService],
             directives: [twitter_search_component_1.TwitterSearchComponent],
             template: "\n      <twitter-search></twitter-search>\n    "
         }), 
